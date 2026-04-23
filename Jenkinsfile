@@ -21,25 +21,44 @@ pipeline {
 
     stage('Generate tfvars') {
       steps {
-       bat '"C:\\Users\\Puneet Rathore\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" excel_to_tfvars.py'
+        bat '"C:\\Users\\Puneet Rathore\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" excel_to_tfvars.py'
       }
     }
 
+    // ✅ ADD HERE
     stage('Terraform Init') {
       steps {
-        bat 'terraform init'
+        withCredentials([usernamePassword(
+          credentialsId: 'aws-creds',
+          usernameVariable: 'AWS_ACCESS_KEY_ID',
+          passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+        )]) {
+          bat 'terraform init'
+        }
       }
     }
 
     stage('Terraform Plan') {
       steps {
-        bat 'terraform plan -var-file=terraform.tfvars.json'
+        withCredentials([usernamePassword(
+          credentialsId: 'aws-creds',
+          usernameVariable: 'AWS_ACCESS_KEY_ID',
+          passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+        )]) {
+          bat 'terraform plan -var-file=terraform.tfvars.json'
+        }
       }
     }
 
     stage('Terraform Apply') {
       steps {
-        bat 'terraform apply -auto-approve -var-file=terraform.tfvars.json'
+        withCredentials([usernamePassword(
+          credentialsId: 'aws-creds',
+          usernameVariable: 'AWS_ACCESS_KEY_ID',
+          passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+        )]) {
+          bat 'terraform apply -auto-approve -var-file=terraform.tfvars.json'
+        }
       }
     }
   }
