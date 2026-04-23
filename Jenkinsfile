@@ -21,7 +21,7 @@ pipeline {
 
     stage('Generate tfvars') {
       steps {
-        bat 'python excel_to_tfvars.py'
+       bat '"C:\\Users\\Puneet Rathore\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" excel_to_tfvars.py'
       }
     }
 
