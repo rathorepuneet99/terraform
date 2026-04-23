@@ -15,7 +15,7 @@ pipeline {
 
     stage('Install Dependencies') {
       steps {
-        bat 'pip install pandas openpyxl'
+        bat 'bat 'python -m pip install pandas openpyxl''
       }
     }
 
