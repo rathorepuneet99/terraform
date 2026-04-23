@@ -29,7 +29,7 @@ pipeline {
     stage('Terraform Init') {
       steps {
         withCredentials([usernamePassword(
-          credentialsId: 'aws-creds',
+          credentialsId: 'AWS-Cred',
           usernameVariable: 'AWS_ACCESS_KEY_ID',
           passwordVariable: 'AWS_SECRET_ACCESS_KEY'
         )]) {
@@ -41,7 +41,7 @@ pipeline {
     stage('Terraform Plan') {
       steps {
         withCredentials([usernamePassword(
-          credentialsId: 'aws-creds',
+          credentialsId: 'AWS-Cred',
           usernameVariable: 'AWS_ACCESS_KEY_ID',
           passwordVariable: 'AWS_SECRET_ACCESS_KEY'
         )]) {
@@ -53,7 +53,7 @@ pipeline {
     stage('Terraform Apply') {
       steps {
         withCredentials([usernamePassword(
-          credentialsId: 'aws-creds',
+          credentialsId: 'AWS-Cred',
           usernameVariable: 'AWS_ACCESS_KEY_ID',
           passwordVariable: 'AWS_SECRET_ACCESS_KEY'
         )]) {
