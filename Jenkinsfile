@@ -15,7 +15,7 @@ pipeline {
 
     stage('Install Dependencies') {
       steps {
-        bat 'python -m pip install pandas openpyxl'
+        bat '"C:\\Users\\Puneet Rathore\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pip install pandas openpyxl'
       }
     }
 
